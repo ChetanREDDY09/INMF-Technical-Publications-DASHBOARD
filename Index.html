@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f9;
+      color: #333;
+    }
+    header {
+      background: #2c3e50;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #34495e;
+    }
+    nav button {
+      background: none;
+      border: none;
+      color: #fff;
+      padding: 1rem;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    nav button:hover {
+      background: #2c3e50;
+    }
+    .container {
+      padding: 2rem;
+    }
+    .search-bar {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .search-bar input {
+      width: 60%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .team-member {
+      text-align: center;
+    }
+    .team-member img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📊 Team Dashboard</h1>
+  </header>
+
+  <nav>
+    <button onclick="showSection('folders')">Folders</button>
+    <button onclick="showSection('team')">Team</button>
+  </nav>
+
+  <div class="container">
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search folders or team..." onkeyup="searchDashboard()">
+    </div>
+
+    <!-- Folder Section -->
+    <section id="folders" class="card">
+      <h2>📂 Folder Locations</h2>
+      <ul id="folderList">
+        <li><a href="https://sharepoint.com/projectA" target="_blank">Project A Folder</a></li>
+        <li><a href="https://sharepoint.com/projectB" target="_blank">Project B Folder</a></li>
+        <li><a href="https://onedrive.com/teamdocs" target="_blank">Team Documents</a></li>
+      </ul>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="card hidden">
+      <h2>👥 Team Details</h2>
+      <div class="grid" id="teamList">
+        <div class="team-member">
+          <img src="https://via.placeholder.com/80" alt="Member 1">
+          <h3>Alice Johnson</h3>
+          <p>Project Manager</p>
+          <p>Email: alice@example.com</p>
+        </div>
+        <div class="team-member">
+          <img src="https://via.placeholder.com/80" alt="Member 2">
+          <h3>Bob Smith</h3>
+          <p>Developer</p>
+          <p>Email: bob@example.com</p>
+        </div>
+        <div class="team-member">
+          <img src="https://via.placeholder.com/80" alt="Member 3">
+          <h3>Carol Lee</h3>
+          <p>Designer</p>
+          <p>Email: carol@example.com</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      document.getElementById('folders').classList.add('hidden');
+      document.getElementById('team').classList.add('hidden');
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function searchDashboard() {
+      let input = document.getElementById('searchInput').value.toLowerCase();
+
+      // Search folders
+      let folders = document.querySelectorAll('#folderList li');
+      folders.forEach(folder => {
+        folder.style.display = folder.textContent.toLowerCase().includes(input) ? '' : 'none';
+      });
+
+      // Search team members
+      let members = document.querySelectorAll('#teamList .team-member');
+      members.forEach(member => {
+        member.style.display = member.textContent.toLowerCase().includes(input) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
